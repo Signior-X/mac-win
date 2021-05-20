@@ -1,6 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
+function DockItem(props) {
+  return (
+    <div className="item">
+      <img src={props.url} />
+    </div>
+  )
+}
+
 function App() {
   return (
     <div className="App" style={{
@@ -8,6 +16,7 @@ function App() {
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover"
     }}>
+      {/* Navigation header */}
       <header className="App-header">
         <div className="left">
           <div className="option">
@@ -33,6 +42,8 @@ function App() {
           <div className="option">12:00 AM</div>
         </div>
       </header>
+
+      {/* Main Opening block */}
       <main>
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -46,6 +57,19 @@ function App() {
           Learn React
         </a>
       </main>
+
+      {/* Dock */}
+      <footer>
+        <dock>
+          <DockItem url="/logos/Excel_64x64.svg" />
+          <DockItem url="/logos/Word_64x64.svg" />
+          <DockItem url="/logos/OneDrive_64x64.svg" />
+          <DockItem url="/logos/OneNote_64x64.svg" />
+          <DockItem url="/logos/PowerPoint_64x64.svg" />
+          <DockItem url="/logos/Skype_64x64.svg" />
+          
+        </dock>
+      </footer>
     </div>
   );
 }

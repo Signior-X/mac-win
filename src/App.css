@@ -6,7 +6,10 @@
   --accent-color-dark-2: #143d70;
   --accent-color-dark-3: #071e33;
   --accent-color-dark-4: #020d17;
-  --accent-color-dark-48: hsla(209, 84%, 5%, 0.8);
+
+  --settings-panel-color: hsla(209, 84%, 5%, 0.8);
+  --settings-dock-size: 64px;
+  --settings-dock-color: hsla(209, 76%, 11%, 0.4);
 }
 
 .App {
@@ -14,8 +17,11 @@
   color: white;
   min-height: 100vh;
   max-height: 100vh;
-  position: relative;
+  position: fixed;
+  display: flex;
   font-size: 14px;
+  width: 100vw;
+  z-index: 1;
 }
 
 .App-link {
@@ -23,10 +29,13 @@
 }
 
 .App-header {
-  background-color: var(--accent-color-dark-48);
+  background-color: var(--settings-panel-color);
   display: flex;
   font-size: 14px;
   font-weight: 500;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 .left {
@@ -103,4 +112,38 @@
   100% {
     opacity: 1;
   }
+}
+
+
+main {
+  padding: 32px 16px 48px 16px;
+  width: 100%;
+  z-index: 5;
+}
+
+footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 8;
+}
+
+dock {
+  padding: 0 12px;
+  margin: auto;
+  display: flex;
+  flex-flow: row;
+  background-color: var(--settings-dock-color);
+}
+
+dock .item img {
+  width: var(--settings-dock-size);
+  height: var(--settings-dock-size);
+  z-index: 8;
+  margin: 0 4px;
+}
+
+dock .item img:hover {
+  background-color: var(--accent-color-dark-2);
 }
