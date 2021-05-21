@@ -68,7 +68,7 @@
   position: absolute;
   top: 28px;
   transform: translateY(-200px);
-  transition: transform 0.6s;
+  transition: transform 0.2s;
 }
 
 .option-menu.open {
@@ -138,7 +138,7 @@
 }
 
 .dropdown-img {
-  transition: transform 0.6s;
+  transition: transform 0.2s;
 }
 
 .dropdown-img.open {
