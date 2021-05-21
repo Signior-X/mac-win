@@ -65,6 +65,46 @@ class Battery extends React.PureComponent {
   }
 }
 
+class Time extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      time: "12:00 AM"
+    }
+
+    this.timeChangeInterval = "";
+  }
+
+  componentDidMount() {
+    let oldTimeString = "";
+
+    // Starting an interval that checks the time
+    this.timeChangeInterval = setInterval(() => {
+      const newTime = new Date();
+      const newTimeString = newTime.getHours() + ":" + newTime.getMinutes();
+
+      if (!oldTimeString || oldTimeString !== newTimeString) {
+        oldTimeString = newTimeString;
+        this.setState({ time: newTimeString });
+      }
+    }, 1000);  // Lag time of time change update is max 1 second
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeChangeInterval);
+  }
+
+  render() {
+    const time = this.state.time;
+    return (
+      <>
+        {time}
+      </>
+    )
+  }
+}
+
 class AppHeader extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -93,7 +133,9 @@ class AppHeader extends React.PureComponent {
           <div className="option">
             <Battery />
           </div>
-          <div className="option">12:00 AM</div>
+          <div className="option">
+            <Time />
+          </div>
         </div>
       </header>
     )
