@@ -145,5 +145,6 @@ footer {
 }
 
 .dock .item img:hover {
-  background-color: var(--accent-color-dark-2);
+  transform: scale(1.5);
+  transition: transform 0.2s;
 }
