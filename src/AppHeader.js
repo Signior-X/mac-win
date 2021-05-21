@@ -7,12 +7,14 @@ class Battery extends React.PureComponent {
     super(props);
 
     this.state = {
-      batteryPercentage: 0.5
+      batteryPercentage: 0.5,
+      batteryCharging: false,
     }
 
     // Global reference variables
     this.myBattery = {};
-    this.myBatteryListener = this.batteryPercentChangeListener;
+    this.myBatteryPercentListener = this.batteryPercentChangeListener;
+    this.myBatteryChargeListener = this.batteryChargeChangeListener;
   }
 
   batteryPercentChangeListener = () => {
@@ -21,30 +23,41 @@ class Battery extends React.PureComponent {
     this.setState({ batteryPercentage: this.myBattery.level });
   }
 
+  batteryChargeChangeListener = () => {
+    console.log("charging change", this.myBattery.charging);
+
+    this.setState({ batteryCharging: this.myBattery.charging });
+  }
+
   componentDidMount() {
     navigator.getBattery().then((bat) => {
-      console.log("Current Battery Level", bat.level);
-      this.setState({ batteryPercentage: bat.level });
+      console.log("Current Battery", bat.level, bat.charging);
+
+      this.setState({ batteryPercentage: bat.level, batteryCharging: bat.charging });
 
       // Storing a reference to myBattery
       this.myBattery = bat;
 
-      bat.addEventListener('levelchange', this.myBatteryListener);
+      bat.addEventListener('levelchange', this.myBatteryPercentListener);
+      bat.addEventListener('chargingchange', this.myBatteryChargeListener);
     });
   }
 
   componentWillUnmount() {
-    this.myBattery.removeEventListener('levelchange', this.myBatteryListener);
+    this.myBattery.removeEventListener('levelchange', this.myBatteryPercentListener);
+    this.myBattery.removeEventListener('charginchange', this.myBatteryChargeListener);
   }
 
   render() {
     const batteryPercentage = this.state.batteryPercentage;
     const batteryTranslateX = (1 - batteryPercentage) * 100;
+    const batteryCharging = this.state.batteryCharging;
+    const color = batteryCharging ? "green" : "white";
 
     return (
       <div className="battery">
         <div className="body">
-          <div className="charging" style={{ transform: `translateX(-${batteryTranslateX}%)`, color: "blue" }}></div>
+          <div className="charging" style={{ transform: `translateX(-${batteryTranslateX}%)`, backgroundColor: `${color}` }}></div>
         </div>
         <div className="terminal"></div>
       </div>
