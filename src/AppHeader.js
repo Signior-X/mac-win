@@ -55,11 +55,13 @@ class Battery extends React.PureComponent {
     const color = batteryCharging ? "green" : "white";
 
     return (
-      <div className="battery">
-        <div className="body">
-          <div className="charging" style={{ transform: `translateX(-${batteryTranslateX}%)`, backgroundColor: `${color}` }}></div>
+      <div className="option">
+        <div className="battery">
+          <div className="body">
+            <div className="charging" style={{ transform: `translateX(-${batteryTranslateX}%)`, backgroundColor: `${color}` }}></div>
+          </div>
+          <div className="terminal"></div>
         </div>
-        <div className="terminal"></div>
       </div>
     )
   }
@@ -70,7 +72,7 @@ class Time extends React.PureComponent {
     super(props);
 
     this.state = {
-      time: "12:00 AM"
+      time: "12:00",
     }
 
     this.timeChangeInterval = "";
@@ -82,7 +84,7 @@ class Time extends React.PureComponent {
     // Starting an interval that checks the time
     this.timeChangeInterval = setInterval(() => {
       const newTime = new Date();
-      const newTimeString = newTime.getHours() + ":" + newTime.getMinutes();
+      const newTimeString = newTime.toTimeString().substr(0, 5);
 
       if (!oldTimeString || oldTimeString !== newTimeString) {
         oldTimeString = newTimeString;
@@ -98,9 +100,34 @@ class Time extends React.PureComponent {
   render() {
     const time = this.state.time;
     return (
-      <>
-        {time}
-      </>
+      <div className="option"> {time} </div>
+    )
+  }
+}
+
+class RightArrowDown extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dropDownOpen: false
+    }
+  }
+
+  handleDropDownClick = () => {
+    this.setState({ dropDownOpen: !this.state.dropDownOpen });
+  }
+
+  render() {
+    const dropDownOpen = this.state.dropDownOpen;
+
+    return (
+      <div className={`option ${dropDownOpen ? "active" : ""}`} onClick={this.handleDropDownClick}>
+        <img className={`dropdown-img ${dropDownOpen ? "open" : ""}`} src="img/arrow-down.png" alt="Show dropdown menu" style={{ width: "20px" }} />
+        <div className={`menu option-menu ${dropDownOpen ? "open" : ""}`} >
+          Hello
+        </div>
+      </div>
     )
   }
 }
@@ -127,15 +154,9 @@ class AppHeader extends React.PureComponent {
           <div className="option">Go</div>
         </div>
         <div className="right">
-          <div className="option">
-            <img src="img/arrow-down.png" alt="Show dropdown menu" style={{ width: "20px" }} />
-          </div>
-          <div className="option">
-            <Battery />
-          </div>
-          <div className="option">
-            <Time />
-          </div>
+          <RightArrowDown />
+          <Battery />
+          <Time />
         </div>
       </header>
     )

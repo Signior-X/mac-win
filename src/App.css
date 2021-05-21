@@ -6,10 +6,12 @@
   --accent-color-dark-2: #143d70;
   --accent-color-dark-3: #071e33;
   --accent-color-dark-4: #020d17;
+  --accent-color-dark-5: #010508;
 
   --settings-panel-color: hsla(209, 84%, 5%, 0.8);
   --settings-dock-size: 64px;
   --settings-dock-color: hsla(209, 76%, 11%, 0.4);
+  --settings-menu-color: hsla(206, 78%, 2%, 0.705);
 }
 
 .App {
@@ -51,6 +53,7 @@
   padding: 4px 8px;
   cursor: default;
   display: flex;
+  position: relative;
 }
 
 .option:hover {
@@ -59,6 +62,26 @@
 
 .option.active {
   background-color: var(--accent-color-dark-1);
+}
+
+.option-menu {
+  position: absolute;
+  top: 28px;
+  transform: translateY(-200px);
+  transition: transform 0.6s;
+}
+
+.option-menu.open {
+  transform: translateY(0);
+}
+
+.right .option-menu {
+  right: 0;
+}
+
+.menu {
+  background-color: var(--settings-menu-color);
+  padding: 32px;
 }
 
 .App-logo {
@@ -114,6 +137,13 @@
   }
 }
 
+.dropdown-img {
+  transition: transform 0.6s;
+}
+
+.dropdown-img.open {
+  transform: rotate(180deg);
+}
 
 main {
   padding: 32px 16px 48px 16px;
