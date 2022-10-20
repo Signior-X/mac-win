@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+## A desktop design created using React
+
+![image](https://user-images.githubusercontent.com/56730716/196911993-5a1de031-d108-4d56-89e4-e565b99f4bbb.png)
+
+### Features
+1. Dyanamic Time, shows realtime and updates the time, a component in itself.
+2. Realtime battery percentage, based on the laptops battery.
+3. A dock, left menu and so much!
+
+
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
